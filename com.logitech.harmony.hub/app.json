@@ -1,0 +1,138 @@
+{
+  "id": "com.logitech.harmony.hub",
+  "version": "0.0.1",
+  "compatibility": "0.x || 1.x",
+  "name": {
+    "en": "Logitech Harmony Hub",
+    "nl": "Logitech Harmony Hub"
+  },
+  "description": {
+    "en": "This app adds flow cards for your Logitech Harmony Hub",
+    "nl": "Deze app voegt flow kaarten toe voor je Logitech Harmony Hub"
+  },
+  "author": {
+    "name": "Net@ctive"
+  },
+  "images": {
+    "small": "assets/images/small.png",
+    "large": "assets/images/large.png"
+  },
+  "permissions": [ ],
+  "speech": [ ],
+  "flow": {
+    // Cards in the when... column are called triggers. Your app tells Homey to fire a trigger, which will then run all of the user's flows with this trigger.
+    //"triggers": [
+    //  {
+    //    "id": "rain_start",
+    //    "title": {
+    //      "en": "It starts raining"
+    //    }
+    //  },
+    //  {
+    //    "id": "rain_stop",
+    //    "title": {
+    //      "en": "It stops raining"
+    //    }
+    //  }
+    //],
+    // Cards in the ...and... column are called conditions. These are things that must be true, for the flow to continue. For example `it is raining`, or `the vacuum cleaner is cleaning`.
+    //"conditions": [
+    //  {
+    //    "id": "raining",
+    //    "title": {
+    //      "en": "It is raining"
+    //    }
+    //  },
+    //  {
+    //    "id": "raining_in",
+    //    "title": {
+    //      "en": "It is going to rain in..."
+    //    },
+    //    "args": [
+    //      {
+    //        "name": "when",
+    //        "type": "dropdown",
+    //        "values": [
+    //          {
+    //            "id": "5",
+    //            "label": {
+    //              "en": "5 minutes"
+    //            }
+    //          },
+    //          {
+    //            "id": "10",
+    //            "label": {
+    //              "en": "10 minutes"
+    //            }
+    //          },
+    //          {
+    //            "id": "15",
+    //            "label": {
+    //              "en": "15 minutes"
+    //            }
+    //          }
+    //        ]
+    //      }
+    //    ]
+    //  }
+    //],
+    // Cards in the ...then column are called actions. These are fired when the trigger has been fired, and all conditions are met.
+    "actions": [
+      {
+        "id": "start_activity",
+        "title": {
+          "en": "Start an activity",
+          "nl": "Start een activiteit"
+        },
+        "args": [
+          {
+            "name": "activity",
+            "type": "text",
+            "placeholder": {
+              "en": "Activity name",
+              "nl": "Naam activiteit"
+            }
+          }
+        ]
+      },
+      {
+        "id": "all_off",
+        "title": {
+          "en": "Turn off all devices",
+          "nl": "Alle apparaten uitschakelen"
+        }
+      }
+    ]
+  }
+  //"drivers": [
+  //  {
+  //    "id": "harmonyhub",
+  //    "name": {
+  //      "en": "Logitech Harmony Hub",
+  //      "nl": "Logitech Harmony Hub"
+  //    },
+  //    "images": {
+  //      "large": "drivers/harmonyhub/assets/images/large.jpg",
+  //      "small": "drivers/harmonyhub/assets/images/small.jpg"
+  //    },
+  //    "class": "light", // TODO: set correct class/capabilities using https://developers.athom.com/library/drivers
+  //    "capabilities": [ "activity", "off" ],
+  //    "pair": [
+  //      {
+  //        "id": "start" // points to ./drivers/harmonyhub/pair/start.html
+  //      },
+  //      {
+  //        "id": "list_harmonyhubs",
+  //        "template": "list_devices", // we use a system template here, for consistency, and less work for us!
+  //        "navigation": {
+  //          "next": "add_hub" // show pair view with id `add_bulbs` when clicked `Next`
+  //        }
+  //      },
+  //      {
+  //        "id": "add_hub",
+  //        "template": "add_devices" // again, use a template
+  //      }
+  //    ]
+  //  }
+  //]
+}

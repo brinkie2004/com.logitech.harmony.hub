@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+    <h1 data-i18n="settings.title"></h1>
+    <p data-i18n="settings.intro"></p>
+
+    <fieldset>
+        <legend>Harmony Hub</legend>
+        <div class="field row">
+            <label for="ipaddress"><span data-i18n="settings.label_ipaddress"></span></label>
+            <input id="ipaddress" type="text" value="" />
+        </div>
+    </fieldset>
+
+    <button id="save" class="right" data-i18n="settings.save" onclick="saveSettings()"></button>
+
+    <script type="text/javascript">
+        var HarmonyHubDiscover = require('harmonyhub-discover');
+        var discover;
+
+        // Initialize Homey
+        function onHomeyReady() {
+            Homey.ready();
+
+            // Fill input with already stored settings
+            Homey.get("ipaddress", function (err, value) {
+                if (value) {
+                    document.getElementById("ipaddress").value = value;
+                }
+            });
+
+            setTimeout(function() {
+                // Auto stop hub discovery in 30 seconds.
+                stopHubDiscovery();
+            }, 30000);
+
+            // Start hub discovery.
+            startHubDiscovery();
+        }
+
+        function startHubDiscovery() {
+            discover = new HarmonyHubDiscover(61991);
+
+            //discover.on('online', function(hub) {
+            //    // Triggered when a new hub was found
+            //    console.log('discovered ' + hub.ip);
+            //});
+
+            discover.on('offline', function(hub) {
+                // Triggered when a hub disappeared
+                var ipaddress = hub.ip;
+                // TODO: Remove hub from list of found hubs.
+            });
+
+            discover.on("update", function(hubs) {
+                // Combines the online & update events by returning an array with all known hubs for ease of use.
+                hubs.each(function(hub) {
+                    var ipaddress = hub.ip;
+                    // TODO: Add hub to list of found hubs.
+                });
+            });
+
+            // TODO: Clear list of previously found hubs.
+
+            discover.start();
+        }
+
+        function stopHubDiscovery() {
+            discover.stop();
+        }
+
+        function saveSettings() {
+            // Update running app with new settings (PUT to api).
+            var ipaddress = document.getElementById("ipaddress").value;
+            Homey.api("PUT", "/settings/", { "ipaddress": ipaddress }, function(err, success) {
+                if (success) {
+                    // Display successful registration.
+                    setSaveButton("lightgreen", "white", __("settings.saved"));
+
+                    // Store settings for the long term.
+                    Homey.set("ipaddress", ipaddress);
+                } else {
+                    // Display failed registration
+                    setSaveButton("lightcoral", "black", __("settings.not_saved"));
+                }
+
+                resetSaveButton();
+            });
+        }
+
+        function resetSaveButton() {
+            setTimeout(function() {
+                setSaveButton("", "black", __("settings.save"));
+            }, 3000);
+        }
+
+        function setSaveButton(backgroundColor, color, innerHtml) {
+            var btnSave = document.getElementById("save");
+            btnSave.style["background-color"] = backgroundColor;
+            btnSave.style["color"] = color;
+            btnSave.innerHTML = innerHtml;
+        }
+    </script>
+</body>
+</html>
