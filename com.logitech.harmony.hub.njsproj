@@ -4,8 +4,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{d527b717-b884-4a5d-9b86-357df4321163}</ProjectGuid>
-    <ProjectHome>com.logitech.harmony.hub\</ProjectHome>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <!-- <ProjectHome>com.logitech.harmony.hub\</ProjectHome> -->
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>app.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -1427,6 +1427,7 @@
     <Content Include="node_modules\harmonyhubjs-discover\node_modules\debug\Readme.md" />
     <Content Include="node_modules\harmonyhubjs-discover\package.json" />
     <Content Include="node_modules\harmonyhubjs-discover\README.md" />
+    <Content Include="README.md" />
     <Content Include="settings\index.html" />
   </ItemGroup>
   <ItemGroup>
